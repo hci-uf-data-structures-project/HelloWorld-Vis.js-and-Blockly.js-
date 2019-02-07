@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+
+<script src="blockly_compressed.js"></script>
+<script src="blocks_compressed.js"></script>
+<script src="msg/js/en.js"></script>
+
+<html>
+<head>
+<title>Page Title</title>
+</head>
+<body>
+
+<div id="blocklyDiv" style="height: 480px; width: 600px;"></div>
+
+<xml id="toolbox" style="display: none">
+  <!-- <block type="controls_if"></block> -->
+  <!-- <block type="controls_repeat_ext"></block> -->
+  <!-- <block type="logic_compare"></block> -->
+  <block type="math_number"></block>
+  <!-- <block type="math_arithmetic"></block> -->
+  <block type="text"></block>
+  <!-- <block type="text_print"></block> -->
+   <!-- <category name="Text"> -->
+  <!-- <block type="math_change"></block> -->
+  <block type="integer_node"></block>
+  <block type="null_node"></block>
+  <block type="root_node"></block>
+  <!-- </category> -->
+</xml>
+
+</body>
+</html>
+
+<script>
+	Blockly.Blocks['integer_node'] = {
+	  init: function() {
+	    this.jsonInit({
+	      "message0": 'node value: %1',
+	      "args0": [
+	        {
+	          "type": "input_value",
+	          "name": "ROOTVALUE",
+	          // "value": 0,
+	        }
+	      ],
+	      "message1": 'left node: %1',
+	      "args1": [
+	        {
+	          "type": "input_value",
+	          "name": "LEFTNODE",
+	          "check": "Node",
+	        }
+	      ],
+
+	      "message2": 'right node: %1',
+	      "args2": [
+	        {
+	          "type": "input_value",
+	          "name": "RIGHTNODE",
+	          "check": "Node",
+	        }
+	      ],
+
+	      "output": "Node",
+	      "colour": 160,
+	      "tooltip": "Returns number of letters in the provided text.",
+	      "helpUrl": "http://www.w3schools.com/jsref/jsref_length_string.asp"
+	    });
+	  }
+	};
+
+
+	Blockly.Blocks['null_node'] = {
+	  init: function() {
+	    this.jsonInit({
+	      "message0": 'null',
+	      "output": "Node",
+	      "colour": 160,
+	      "tooltip": "Returns number of letters in the provided text.",
+	      "helpUrl": "http://www.w3schools.com/jsref/jsref_length_string.asp"
+	    });
+	  }
+	};
+
+	Blockly.Blocks['root_node'] = {
+	  init: function() {
+	    this.jsonInit({
+	      "message0": 'root: %1',
+	      "args0": [
+	        {
+	          "type": "input_value",
+	          "name": "ROOTNODE",
+	          "check": "Node",
+	        }
+	      ],
+	      // "output": "Node",
+	      "colour": 160,
+	      "tooltip": "Returns number of letters in the provided text.",
+	      "helpUrl": "http://www.w3schools.com/jsref/jsref_length_string.asp"
+	    });
+	  }
+	};
+
+
+
+// 	var mathChangeJson = {
+//   "message0": "change %1 by %2",
+//   "args0": [
+//     {"type": "field_variable", "name": "VAR", "variable": "item", "variableTypes": [""]},
+//     {"type": "input_value", "name": "DELTA", "check": "Number"}
+//   ],
+//   "previousStatement": null,
+//   "nextStatement": null,
+//   "colour": 230
+// };
+
+// Blockly.Blocks['math_change'] = {
+//   init: function() {
+//     this.jsonInit(mathChangeJson);
+//     // Assign 'this' to a variable for use in the tooltip closure below.
+//     var thisBlock = this;
+//     this.setTooltip(function() {
+//       return 'Add a number to variable "%1".'.replace('%1',
+//           thisBlock.getFieldValue('VAR'));
+//     });
+//   }
+// };
+
+  var workspace = Blockly.inject('blocklyDiv',
+      {toolbox: document.getElementById('toolbox')});
+</script>
