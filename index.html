@@ -4,6 +4,9 @@
 <script src="blocks_compressed.js"></script>
 <script src="msg/js/en.js"></script>
 
+<script type="text/javascript" src="vis.js"></script>
+<link href="vis.css" rel="stylesheet" type="text/css" />
+
 <html>
 <head>
 <title>Page Title</title>
@@ -13,23 +16,95 @@
 <div id="blocklyDiv" style="height: 480px; width: 600px;"></div>
 
 <xml id="toolbox" style="display: none">
-  <!-- <block type="controls_if"></block> -->
-  <!-- <block type="controls_repeat_ext"></block> -->
-  <!-- <block type="logic_compare"></block> -->
   <block type="math_number"></block>
-  <!-- <block type="math_arithmetic"></block> -->
   <block type="text"></block>
-  <!-- <block type="text_print"></block> -->
-   <!-- <category name="Text"> -->
-  <!-- <block type="math_change"></block> -->
   <block type="integer_node"></block>
   <block type="null_node"></block>
   <block type="root_node"></block>
-  <!-- </category> -->
 </xml>
 
+
+
+<style type="text/css">
+    #mynetwork {
+        width: 600px;
+        height: 400px;
+        border: 1px solid lightgray;
+    }
+</style>
+
+<div id="mynetwork"></div>
+
 </body>
-</html>
+
+<script type="text/javascript">
+    // create an array with nodes
+    var nodes = new vis.DataSet([
+        {id: 1, label: 'Node 1'},
+        {id: 2, label: 'Node 2'},
+        {id: 3, label: 'Node 3'},
+        {id: 4, label: 'Node 4'},
+        {id: 5, label: 'Node 5'},
+        {id: 6, label: 'Node 6'},
+        {id: 7, label: 'Node 7'}
+    ]);
+
+    // create an array with edges
+    var edges = new vis.DataSet([
+        {from: 1, to: 2},
+        {from: 1, to: 3},
+        {from: 2, to: 4},
+        {from: 2, to: 5},
+        {from: 3, to: 6},
+        {from: 3, to: 7}
+    ]);
+
+    // create a network
+    var container = document.getElementById('mynetwork');
+
+    // provide the data in the vis format
+    var data = {
+        nodes: nodes,
+        edges: edges
+    };
+    var options = {};
+
+    // initialize your network!
+    
+	var options = {
+	  autoResize: true,
+	  height: '100%',
+	  width: '100%',
+	  locale: 'en',
+	  // locales: locales,
+	  // clickToUse: false,
+	  // configure: {...},    // defined in the configure module.
+	  // edges: {...},        // defined in the edges module.
+	  // nodes: {...},        // defined in the nodes module.
+	  // groups: {...},       // defined in the groups module.
+	    layout: {
+		    randomSeed: undefined,
+		    improvedLayout:true,
+		    hierarchical: {
+		      enabled:true,
+		      levelSeparation: 150,
+		      nodeSpacing: 300,
+		      treeSpacing: 200,
+		      blockShifting: false,
+		      edgeMinimization: false,
+		      parentCentralization: false,
+		      direction: 'UD',        // UD, DU, LR, RL
+		      sortMethod: 'directed'   // hubsize, directed
+		    }
+		  }     // defined in the layout module.
+	  // interaction: {...},  // defined in the interaction module.
+	  // manipulation: {...}, // defined in the manipulation module.
+	  // physics: {...},      // defined in the physics module.
+	}
+	var network = new vis.Network(container, data, options);
+	network.setOptions(options);
+
+</script>
 
 <script>
 	Blockly.Blocks['integer_node'] = {
@@ -100,32 +175,7 @@
 	    });
 	  }
 	};
-
-
-
-// 	var mathChangeJson = {
-//   "message0": "change %1 by %2",
-//   "args0": [
-//     {"type": "field_variable", "name": "VAR", "variable": "item", "variableTypes": [""]},
-//     {"type": "input_value", "name": "DELTA", "check": "Number"}
-//   ],
-//   "previousStatement": null,
-//   "nextStatement": null,
-//   "colour": 230
-// };
-
-// Blockly.Blocks['math_change'] = {
-//   init: function() {
-//     this.jsonInit(mathChangeJson);
-//     // Assign 'this' to a variable for use in the tooltip closure below.
-//     var thisBlock = this;
-//     this.setTooltip(function() {
-//       return 'Add a number to variable "%1".'.replace('%1',
-//           thisBlock.getFieldValue('VAR'));
-//     });
-//   }
-// };
-
   var workspace = Blockly.inject('blocklyDiv',
       {toolbox: document.getElementById('toolbox')});
 </script>
+</html>
